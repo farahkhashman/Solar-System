@@ -20,12 +20,15 @@ public class Entity {
 		rad = radius;
 		img = image;
 	}
+	
+	
 	//edited
 	//calculates the x and y components of the net force
 	public boolean calcForces(ArrayList<Entity> entities){
 		accx = 0;
 		accy = 0;
 		for(Entity e : entities) {
+			
 			if(e.equals(this)) {
 				continue;
 			}
@@ -39,6 +42,7 @@ public class Entity {
 				accy-=(bigG* e.m)/((y-e.y)*(y-e.y));
 			else
 				accy+=(bigG* e.m)/((y-e.y)*(y-e.y));
+			
 		}
 		
 		
@@ -46,12 +50,16 @@ public class Entity {
 	}
 	
 	//updates the positions and speeds of the planet
-	public boolean update() {
+	public boolean update(ArrayList<Entity> entities) {
+		
+		//recalc forces every call
+		calcForces(entities);
 		x+= vx;
 		y+=vy;
 		vx+=accx;
 		vy+=accy;
 		return true;
-	
 	}
+	
+	
 }
