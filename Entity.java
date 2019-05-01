@@ -20,7 +20,7 @@ public class Entity {
 		rad = radius;
 		img = image;
 	}
-	
+	//edited
 	//calculates the x and y components of the net force
 	public boolean calcForces(ArrayList<Entity> entities){
 		accx = 0;
