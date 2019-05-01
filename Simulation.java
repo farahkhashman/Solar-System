@@ -29,7 +29,7 @@ public class Simulation extends JPanel {
 			frame.setVisible(true);
 			this.setFocusable(true);
 			
-			img = Toolkit.getDefaultToolkit().getImage("spaceb.jpg");
+			img = Toolkit.getDefaultToolkit().getImage("spaceb.png");
 			smallerimg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 			
 		}
