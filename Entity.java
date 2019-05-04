@@ -1,24 +1,31 @@
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class Entity {
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+
+public class Entity extends JPanel{
 
 	int x, y;
 	int vx, vy;
 	int accx, accy;
-	int m, rad;
+	double m, rad;
 	Image img;
 	double bigG = 6.671e-11;
 	
-	public Entity(int xpos, int ypos, int vx, int vy, int mass, int radius, Image image) {
+	public Entity(int xpos, int ypos, int vx, int vy, double d, double radius, String string) throws IOException {
 		x=xpos;
 		y=ypos;
 		this.vx = vx;
 		this.vy = vy;
-		m = mass;
+		m = d;
 		rad = radius;
-		img = image;
+		img = this.getToolkit().getImage(string).getScaledInstance((int)radius, (int)radius, Image.SCALE_SMOOTH);
+		
 	}
 	
 	
