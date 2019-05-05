@@ -10,19 +10,19 @@ import javax.swing.JPanel;
 
 public class Entity extends JPanel{
 
-	int x, y;
-	int vx, vy;
-	int accx, accy;
+	double x, y;
+	double vx, vy;
+	double accx, accy;
 	double m, rad;
 	Image img;
 	double bigG = 6.671e-11;
 	
-	public Entity(int xpos, int ypos, int vx, int vy, double d, double radius, String string) throws IOException {
+	public Entity(double xpos, double ypos, double vx, double vy, double mass, double radius, String string) throws IOException {
 		x=xpos;
 		y=ypos;
 		this.vx = vx;
 		this.vy = vy;
-		m = d;
+		m = mass;
 		rad = radius;
 		img = this.getToolkit().getImage(string).getScaledInstance((int)radius, (int)radius, Image.SCALE_SMOOTH);
 		

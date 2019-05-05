@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -35,18 +36,20 @@ public class Simulation extends JPanel {
 			smallerimg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 			
 			//Creating the list of planets or objects
-			//          new Entity(int xpos, int ypos, int vx, int vy, int mass, int radius, Image image)
+			//          new Entity(int xpos, int ypos, int vx, int vy, int mass, int radius, String image)
 			try {
-				System.out.println(1);
+				
 				//sun
-				entities.add(new Entity(width/2, height/2, 0, 0, 1.989e30, 695510, "Sun.png"));
+				entities.add(new Entity(width*2e9/2, height*2e9/2, 0, 0, 1.989e30, 695510, "Sun.png"));
 				
 				//earth
-				entities.add(new Entity(width/3, height/2, 0, 10, 5.972e24, 6371, "Earth.png"));
+				entities.add(new Entity(width*2e9/3, height*2e9/2, 0, 3e6, 5.972e24, 6371, "Earth.png"));
 				
 				//moon
 				//entities.add(new Entity(width/3, height/2-30, 2, 0, 7.348e22, 1737.1, "Moon.png"));
-				System.out.println(0);
+				
+				
+				run();
 				
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -55,33 +58,27 @@ public class Simulation extends JPanel {
 		}
 		
 		public void run() {
-			System.out.println(2);
 
-			
-			repaint();
-			try {
-				Thread.sleep(35);
-			}catch(Exception e) {
-				e.printStackTrace();
+			while(true) {
+				repaint();
+				try {
+					Thread.sleep(35);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		
 		public void paint(Graphics g) {
-			System.out.println(3);
 
-			g.drawImage(smallerimg,0,0,this);
-			System.out.println(4);
+			//g.drawImage(smallerimg,0,0,this);
+
 
 			for(Entity pl: entities) {
-				System.out.println(5);
-				try {
+				g.setColor(Color.RED);
+				g.fillOval((int)((pl.x-pl.rad)/2e9),(int) ((pl.y-pl.rad)/2e9),(int) Math.log(pl.rad), (int) Math.log(pl.rad/1000));
+				System.out.println(pl.x/2e9);
 				pl.update(entities);
-				}catch(Exception e) {
-					System.out.println(0);
-
-					e.printStackTrace();
-				}
-				g.drawImage(pl.img,(int)(pl.x-pl.rad),(int) (pl.y-pl.rad),this);
 				
 
 			}
