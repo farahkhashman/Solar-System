@@ -74,10 +74,13 @@ public class Simulation extends JPanel {
 		
 		public void paint(Graphics g) {
 
+			
 			//g.drawImage(smallerimg,0,0,this);
 
 
 			for(Entity pl: entities) {
+				//Image i = pl.img;
+				//g.drawImage(i, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer);
 				for(int i=0;i<timescale; i++)
 				pl.update(entities);
 				g.setColor(Color.RED);
