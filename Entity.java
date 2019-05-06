@@ -36,9 +36,7 @@ public class Entity extends JPanel{
 		accy = 0;
 		for(Entity e : entities) {
 			
-			if(e.equals(this)) {
-				continue;
-			}
+			
 			
 			if(x>e.x) 
 				accx-=(bigG* e.m)/((x-e.x)*(x-e.x));
