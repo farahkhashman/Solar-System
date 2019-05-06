@@ -42,12 +42,12 @@ public class Entity extends JPanel{
 			
 			if(x>e.x) 
 				accx-=(bigG* e.m)/((x-e.x)*(x-e.x));
-			else
+			else if(x<e.x)
 				accx+=(bigG* e.m)/((x-e.x)*(x-e.x));
 			
 			if(y>e.y)
 				accy-=(bigG* e.m)/((y-e.y)*(y-e.y));
-			else
+			else if(y<e.y)
 				accy+=(bigG* e.m)/((y-e.y)*(y-e.y));
 			
 		}

@@ -16,7 +16,10 @@ public class Simulation extends JPanel {
 	private final int width = 1000, height = 700;
 	Image img, smallerimg;
 	ArrayList<Entity> entities = new ArrayList<Entity>();
-		
+	
+	int timescale = 1500;
+	
+	
 		public Simulation() {
 			BoxLayout boxlayout = new BoxLayout(this, BoxLayout.Y_AXIS);
 			setLayout(boxlayout);
@@ -40,10 +43,10 @@ public class Simulation extends JPanel {
 			try {
 				
 				//sun
-				entities.add(new Entity(width*2e9/2, height*2e9/2, 0, 0, 1.989e30, 695510, "Sun.png"));
+				entities.add(new Entity(width*2e10/2, height*2e10/2, 0, 0, 1.989e30, 695510, "Sun.png"));
 				
 				//earth
-				entities.add(new Entity(width*2e9/3, height*2e9/2, 0, 3e6, 5.972e24, 6371, "Earth.png"));
+				entities.add(new Entity(width*2e10/2 - 149.6e9, height*2e10, 0, -3e6, 5.972e24, 6371, "Earth.png"));
 				
 				//moon
 				//entities.add(new Entity(width/3, height/2-30, 2, 0, 7.348e22, 1737.1, "Moon.png"));
@@ -75,10 +78,12 @@ public class Simulation extends JPanel {
 
 
 			for(Entity pl: entities) {
-				g.setColor(Color.RED);
-				g.fillOval((int)((pl.x-pl.rad)/2e9),(int) ((pl.y-pl.rad)/2e9),(int) Math.log(pl.rad), (int) Math.log(pl.rad/1000));
-				System.out.println(pl.x/2e9);
+				for(int i=0;i<timescale; i++)
 				pl.update(entities);
+				g.setColor(Color.RED);
+				g.fillOval((int)((pl.x-pl.rad)/1e10),(int) ((pl.y-pl.rad)/1e10),(int) Math.log(pl.rad), (int) Math.log(pl.rad));
+				System.out.println(pl.x/2e10 +" and "+ pl.y/2e10);
+				
 				
 
 			}
