@@ -32,12 +32,18 @@ public class Entity extends JPanel{
 	//edited
 	//calculates the x and y components of the net force
 	public boolean calcForces(ArrayList<Entity> entities){
+		
 		accx = 0;
 		accy = 0;
 		for(Entity e : entities) {
 			
+			if(this.equals(e)) {
+				continue;
+			}
 			
-			
+			accx-=(bigG * e.m * (x-e.x))  / Math.pow((x-e.x)*(x-e.x)+(y-e.y)*(y-e.y) ,1.5);
+			accy+=(bigG * e.m * (y-e.y))  / Math.pow((x-e.x)*(x-e.x)+(y-e.y)*(y-e.y) ,1.5);
+			/*
 			if(x>e.x) 
 				accx-=(bigG* e.m)/((x-e.x)*(x-e.x));
 			else if(x<e.x)
@@ -47,7 +53,7 @@ public class Entity extends JPanel{
 				accy-=(bigG* e.m)/((y-e.y)*(y-e.y));
 			else if(y<e.y)
 				accy+=(bigG* e.m)/((y-e.y)*(y-e.y));
-			
+			*/
 		}
 		
 		
@@ -59,10 +65,11 @@ public class Entity extends JPanel{
 		
 		//recalc forces every call
 		calcForces(entities);
-		x+= vx;
-		y+=vy;
 		vx+=accx;
 		vy+=accy;
+		x+= vx;
+		y-=vy;
+		
 		return true;
 	}
 	

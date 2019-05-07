@@ -17,7 +17,7 @@ public class Simulation extends JPanel {
 	Image img, smallerimg;
 	ArrayList<Entity> entities = new ArrayList<Entity>();
 	
-	double timescale = 3e4;
+	double timescale = 36500;
 	double GraphicsScaling = 3e9/5;
 	
 		public Simulation() {
@@ -39,14 +39,14 @@ public class Simulation extends JPanel {
 			smallerimg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 			
 			//Creating the list of planets or objects
-			//          new Entity(int xpos, int ypos, int vx, int vy, int mass, int radius, String image)
+			//               new Entity(int xpos, int ypos, int vx, int vy, int mass, int radius, String image)
 			try {
 				
 				//sun
 				entities.add(new Entity(0, 0, 0, 0, 1.989e30, 695510, "Sun.png"));
 				
 				//earth
-				entities.add(new Entity(-149.6e9,0, 0, 0, 5.972e24, 6371, "Earth.png"));
+				entities.add(new Entity(0, -149.6e9, 3e4, 0, 5.972e24, 6371, "Earth.png"));
 				
 				//moon
 				//entities.add(new Entity(width/3, height/2-30, 2, 0, 7.348e22, 1737.1, "Moon.png"));
