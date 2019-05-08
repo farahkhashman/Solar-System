@@ -35,25 +35,31 @@ public class Entity extends JPanel{
 		
 		accx = 0;
 		accy = 0;
+		
 		for(Entity e : entities) {
 			
+			//Since we do not want to calculate a planet's gravity exerted on itself, we use this if statement to skip it
 			if(this.equals(e)) {
 				continue;
 			}
 			
+			
+			/* Equations
+			 *         G * M1                        dx                          dy
+			 * acc = ________       &&        cos@ = __         &&        sin@ = __       dx = (this.x - otherPlanet.x)
+			 *          d^2                          d                           d
+			 *          
+			 *          
+			 *          
+			 *        G * M1   dx   G * M1 * dx               G * M1    dy     G * M1 * dy
+			 * accx = ______ * __ = ___________       accy = ______  *  __   = ___________
+			 *          d^2    d       d^3                     d^2      d         d^3     
+			 *          
+			 */
+			
 			accx-=(bigG * e.m * (x-e.x))  / Math.pow((x-e.x)*(x-e.x)+(y-e.y)*(y-e.y) ,1.5);
 			accy+=(bigG * e.m * (y-e.y))  / Math.pow((x-e.x)*(x-e.x)+(y-e.y)*(y-e.y) ,1.5);
-			/*
-			if(x>e.x) 
-				accx-=(bigG* e.m)/((x-e.x)*(x-e.x));
-			else if(x<e.x)
-				accx+=(bigG* e.m)/((x-e.x)*(x-e.x));
 			
-			if(y>e.y)
-				accy-=(bigG* e.m)/((y-e.y)*(y-e.y));
-			else if(y<e.y)
-				accy+=(bigG* e.m)/((y-e.y)*(y-e.y));
-			*/
 		}
 		
 		

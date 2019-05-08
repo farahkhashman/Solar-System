@@ -17,6 +17,7 @@ public class Simulation extends JPanel {
 	Image img, smallerimg;
 	ArrayList<Entity> entities = new ArrayList<Entity>();
 	
+	//Variables to display the simulation
 	double timescale = 36500;
 	double GraphicsScaling = 3e9/5;
 	
@@ -49,7 +50,7 @@ public class Simulation extends JPanel {
 				entities.add(new Entity(0, -149.6e9, 3e4, 0, 5.972e24, 6371, "Earth.png"));
 				
 				//moon
-				//entities.add(new Entity(width/3, height/2-30, 2, 0, 7.348e22, 1737.1, "Moon.png"));
+				//entities.add(new Entity(0 ,-149.6e9 - 384400, 32000, 0, 7.348e22, 1737.1, "Moon.png"));
 				
 				
 				run();
@@ -74,18 +75,28 @@ public class Simulation extends JPanel {
 		
 		public void paint(Graphics g) {
 
-			g.drawImage(smallerimg,0,0,this);
+			//g.drawImage(smallerimg,0,0,this);
 
 
 			for(Entity pl: entities) {
-				//this updates the posiion of the planets
-				//the for loop is there to make the simulation go faster
-				for(int i=0;i<timescale; i++)
-				pl.update(entities);
+				
+				//this updates the position of the planets
+				//the for loop makes the simulation go faster depending on the timeScale value, the higher the timeScale the faster
+				for(int i=0;i<timescale; i++) {
+					pl.update(entities);
+				}
+				
+				
 				
 				g.setColor(Color.RED);
 				
+				//The GraphicsScaling variable is a number that makes the distances between the planets fit on the screen.
+				//
+				// In our calculations, the sun is at (0,0) and the other planets are referenced to that point also.
+				//  So (0,0) is shifted to the center of the screen by adding width/2 to x, and height/2 to y after scaling down the universe to screen-size
 				g.fillOval((int)((pl.x/GraphicsScaling)+width/2), (int)((pl.y/GraphicsScaling)+height/2), (int)(Math.log(pl.rad)), (int)(Math.log(pl.rad)) );
+				
+				
 				System.out.println((pl.x/GraphicsScaling+width/2) +" and " + (pl.y/GraphicsScaling+height/2));
 				
 
