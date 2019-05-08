@@ -16,6 +16,7 @@ public class Simulation extends JPanel {
 	private final int width = 1000, height = 700;
 	Image img, smallerimg;
 	ArrayList<Entity> entities = new ArrayList<Entity>();
+	ArrayList<Point> orbit = new ArrayList<Point>();
 	
 	//Variables to display the simulation
 	double timescale = 36500;
@@ -84,8 +85,15 @@ public class Simulation extends JPanel {
 				//the for loop makes the simulation go faster depending on the timeScale value, the higher the timeScale the faster
 				for(int i=0;i<timescale; i++) {
 					pl.update(entities);
+					Point c = new Point((int)((pl.x/GraphicsScaling)+width/2),(int)((pl.y/GraphicsScaling)+height/2));
+					orbit.add(c);
 				}
 				
+				for(int i = 0; i < orbit.size()-1; i+=400) {
+				g.setColor(Color.green);
+				//g.drawOval(orbit.get(i).x, orbit.get(i).y, 10, 10);
+				g.drawLine(orbit.get(i).x, orbit.get(i).y, orbit.get(i+1).x, orbit.get(i+1).y);
+				}
 				
 				
 				g.setColor(Color.RED);
