@@ -22,6 +22,7 @@ public class Simulation extends JPanel {
 	//Variables to display the simulation
 	double timescale = 36500;
 	double GraphicsScaling = 3e9/5;
+	double Distance = 0;
 	
 		public Simulation() {
 			BoxLayout boxlayout = new BoxLayout(this, BoxLayout.Y_AXIS);
@@ -51,10 +52,44 @@ public class Simulation extends JPanel {
 				//earth
 				entities.add(new Entity(0, -149.6e9, 3e4, 0, 5.972e24, 6371, "Earth.png"));
 				
+				//saturn
+				entities.add(new Entity(0, -1427e9,  9680, 0, 5.683e26, 58232, "Saturn.png"));
+				
 				//moon
 				//entities.add(new Entity(0 ,-149.6e9 - 384400, 32000, 0, 7.348e22, 1737.1, "Moon.png"));
 				
+				//mercury
+				entities.add(new Entity(0, -57.9e9, 48e3, 0, 3.285e23, 2439.7, "Mercury.png")); 
 				
+				//jupiter
+				entities.add(new Entity(0, -778.3e9,  13070, 0, 1.89813e27, 69911 , "Jupiter.png"));
+				
+				//mars
+				entities.add(new Entity(0, -227.9e9, 24007, 0, 6.39e23, 3389.5 , "Mars.png"));
+				
+				//neptune
+				entities.add(new Entity(0, -4497.1e9, 5430, 0, 1.024e26, 24622, "3D_Neptune.png"));
+				
+				//pluto
+				entities.add(new Entity(0, -5913e9, 4670, 0, 1.30900e22, 1188.3, "Pluto.png"));
+				
+				//uranus
+				entities.add(new Entity(0, -2871.0e9, 6800, 0, 8.681e25, 25362, "Uranus.png"));
+							
+				//venus
+				entities.add(new Entity(0, -108.2e9, 35020, 0, 4.867e24, 6051.8, "Venus.png"));
+				
+			//gets the largest distance and uses that in the scaling calculation
+				for(Entity pl : entities) {
+					if(pl.y < Distance) {
+						Distance = pl.y;
+					}
+				}
+		
+				System.out.println("Distance: "+Distance);
+				GraphicsScaling = Distance/500;
+				
+				//the scaling is using a ratio, but we should try to make it logarithmically instead
 				run();
 				
 			} catch (IOException e) {
