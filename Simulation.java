@@ -17,7 +17,8 @@ public class Simulation extends JPanel {
 	private final int width = 1000, height = 700;
 	Image img, smallerimg;
 	ArrayList<Entity> entities = new ArrayList<Entity>();
-	ArrayList<Point> orbit = new ArrayList<Point>();
+	ArrayList<ArrayList<Point>> list_orbit = new ArrayList<ArrayList<Point>>();
+	ArrayList<Point> orbit;
 	
 	//Variables to display the simulation
 	double timescale = 36500;
@@ -45,7 +46,7 @@ public class Simulation extends JPanel {
 			//Creating the list of planets or objects
 			//               new Entity(int xpos, int ypos, int vx, int vy, int mass, int radius, String image)
 			try {
-				
+				orbit = new ArrayList<Point>();
 				//sun
 				entities.add(new Entity(0, 0, 0, 0, 1.989e30, 695510, "Sun.png"));
 				
@@ -99,7 +100,9 @@ public class Simulation extends JPanel {
 		}
 		
 		public void run() {
-
+			
+			list_orbit.add(orbit);
+			
 			while(true) {
 				repaint();
 				try {
@@ -121,15 +124,14 @@ public class Simulation extends JPanel {
 				//the for loop makes the simulation go faster depending on the timeScale value, the higher the timeScale the faster
 				for(int i=0;i<timescale; i++) {
 					pl.update(entities);
-					Point c = new Point((int)((pl.x/GraphicsScaling)+width/2),(int)((pl.y/GraphicsScaling)+height/2));
-					orbit.add(c);
 				}
 				
-				for(int i = 0; i < orbit.size()-1; i+=400) {
-				g.setColor(Color.green);
-				//g.drawOval(orbit.get(i).x, orbit.get(i).y, 10, 10);
-				g.drawLine(orbit.get(i).x, orbit.get(i).y, orbit.get(i+1).x, orbit.get(i+1).y);
+				if(! pl.name.equals("Sun")) {
+				Point c = new Point((int)((pl.x/GraphicsScaling)+width/2),(int)((pl.y/GraphicsScaling)+height/2));
+				orbit.add(c);
 				}
+				
+
 				
 				
 				g.setColor(Color.RED);
@@ -144,6 +146,19 @@ public class Simulation extends JPanel {
 				System.out.println((pl.x/GraphicsScaling+width/2) +" and " + (pl.y/GraphicsScaling+height/2));
 				
 
+				}
+				for(int j = 0; j < list_orbit.size(); j++) {
+				
+				//System.out.println(list_orbit.get(j));
+				
+				for(int i = 0; i < list_orbit.get(j).size()-1; i+=1) {
+				
+				 Graphics2D g2 = (Graphics2D) g;
+				 g2.setStroke(new BasicStroke(3));
+				 g2.setColor(Color.green);
+				 g2.drawLine(list_orbit.get(j).get(i).x, list_orbit.get(j).get(i).y, list_orbit.get(j).get(i+1).x, list_orbit.get(j).get(i+1).y);
+			}
+		
 			}
 
 			
